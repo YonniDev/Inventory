@@ -152,6 +152,7 @@ const Inventory = {
     
     // Open inventory
     open: function(data) {
+        console.log("[v0] Inventory.open called with data:", data);
         this.isOpen = true;
         
         // Reset weights
@@ -285,7 +286,18 @@ const Inventory = {
         const self = this;
         let totalWeight = 0;
         
-        items.forEach(function(item) {
+        // Handle both array and object formats
+        if (!items) return;
+        
+        // Convert object to array if needed (QBCore sends inventory as object with slot keys)
+        let itemsArray = items;
+        if (!Array.isArray(items)) {
+            console.log("[v0] Converting inventory object to array:", items);
+            itemsArray = Object.values(items);
+        }
+        console.log("[v0] populateInventory - itemsArray:", itemsArray, "inventoryType:", inventoryType);
+        
+        itemsArray.forEach(function(item) {
             if (!item) return;
             
             const slotNum = item.slot;
