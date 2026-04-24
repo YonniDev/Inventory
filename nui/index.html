@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="css/inventory.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="inventory-container" class="inventory-container hidden">
+        <!-- Left Column: Body Section -->
+        <div class="body-section">
+            <div class="section-header">
+                <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <span class="section-title">BODY</span>
+            </div>
+            
+            <div class="body-display">
+                <div class="body-silhouette">
+                    <!-- SVG Body Silhouette -->
+                    <svg viewBox="0 0 200 400" class="silhouette-svg">
+                        <!-- Head -->
+                        <ellipse cx="100" cy="35" rx="28" ry="32" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Neck -->
+                        <rect x="90" y="65" width="20" height="20" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Torso -->
+                        <path d="M60 85 L140 85 L150 180 L50 180 Z" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Pelvis -->
+                        <path d="M55 180 L145 180 L135 220 L65 220 Z" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Left Arm -->
+                        <path d="M60 85 L30 100 L20 180 L35 185 L50 110 L60 95" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Right Arm -->
+                        <path d="M140 85 L170 100 L180 180 L165 185 L150 110 L140 95" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Left Leg -->
+                        <path d="M70 220 L60 320 L55 380 L80 380 L85 320 L90 220" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Right Leg -->
+                        <path d="M130 220 L140 320 L145 380 L120 380 L115 320 L110 220" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.6"/>
+                        <!-- Spine detail -->
+                        <line x1="100" y1="85" x2="100" y2="180" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.3"/>
+                        <!-- Rib hints -->
+                        <path d="M70 100 Q100 95 130 100" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.3"/>
+                        <path d="M65 120 Q100 115 135 120" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.3"/>
+                        <path d="M60 140 Q100 135 140 140" fill="none" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.3"/>
+                    </svg>
+                    
+                    <!-- Stats Overlays on Body -->
+                    <div class="body-stat stat-stress" data-stat="stress">
+                        <div class="stat-indicator">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="stat-label">Stress</span>
+                        </div>
+                        <span class="stat-value" id="stress-value">0%</span>
+                    </div>
+                    
+                    <div class="body-stat stat-health" data-stat="health">
+                        <div class="stat-indicator">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span class="stat-label">Health</span>
+                        </div>
+                        <span class="stat-value" id="health-value">100/100</span>
+                    </div>
+                    
+                    <div class="body-stat stat-armor" data-stat="armor">
+                        <div class="stat-indicator">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            </svg>
+                            <span class="stat-label">Armor</span>
+                        </div>
+                        <span class="stat-value" id="armor-value">0/100</span>
+                    </div>
+                    
+                    <div class="body-stat stat-hunger" data-stat="hunger">
+                        <div class="stat-indicator">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05l-5 2v5.12c0 .45-.37.83-.83.83H16c-.46 0-.83-.38-.83-.83V7.05l-5-2-1.66 16.48c.1.82.79 1.46 1.63 1.46h1.66c.84 0 1.53-.64 1.63-1.46L14.5 11h1l1.07 10.53c.1.82.79 1.46 1.63 1.46zM9 5c0-1.66-1.34-3-3-3S3 3.34 3 5s1.34 3 3 3 3-1.34 3-3z"/>
+                            </svg>
+                            <span class="stat-label">Hunger</span>
+                        </div>
+                        <span class="stat-value" id="hunger-value">100%</span>
+                    </div>
+                    
+                    <div class="body-stat stat-thirst" data-stat="thirst">
+                        <div class="stat-indicator">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/>
+                            </svg>
+                            <span class="stat-label">Thirst</span>
+                        </div>
+                        <span class="stat-value" id="thirst-value">100%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cash Display -->
+            <div class="cash-display">
+                <div class="cash-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="cash-icon">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+                    </svg>
+                    <span class="cash-label">Cash</span>
+                    <span class="cash-value" id="cash-value">$0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Center Column: Hotbar + Pockets -->
+        <div class="inventory-section">
+            <!-- Hotbar -->
+            <div class="hotbar-container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span class="section-title">HOTBAR</span>
+                    <span class="section-id" id="player-id"></span>
+                </div>
+                
+                <div class="hotbar-search">
+                    <input type="text" id="inventory-search" placeholder="Filter Inventory..." />
+                    <span class="hotbar-key">0</span>
+                </div>
+                
+                <div class="hotbar-slots" id="hotbar-slots">
+                    <!-- Slots 1-5 generated by JS -->
+                </div>
+            </div>
+            
+            <!-- Pockets -->
+            <div class="pockets-container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 7h-4l-2-3H6L4 7H0v13h24V7h-4zM12 18a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+                    </svg>
+                    <span class="section-title">POCKETS</span>
+                    <span class="section-id" id="player-cid"></span>
+                    <span class="weight-display">
+                        <span id="current-weight">0</span>/<span id="max-weight">250.0</span> lbs
+                    </span>
+                </div>
+                
+                <div class="inventory-grid" id="inventory-grid">
+                    <!-- Inventory slots generated by JS -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column: Secondary Inventory -->
+        <div class="secondary-section" id="secondary-section">
+            <div class="section-header">
+                <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                </svg>
+                <span class="section-title" id="secondary-title">GROUND</span>
+                <span class="section-id" id="secondary-id"></span>
+                <div class="secondary-actions">
+                    <button class="action-btn close-btn" id="close-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="secondary-weight">
+                <span id="secondary-current-weight">0</span>/<span id="secondary-max-weight">1000.0</span> lbs
+            </div>
+            
+            <div class="secondary-grid" id="secondary-grid">
+                <!-- Secondary inventory slots generated by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Item Tooltip -->
+    <div id="item-tooltip" class="item-tooltip hidden">
+        <div class="tooltip-header">
+            <span class="tooltip-name" id="tooltip-name">Item Name</span>
+            <span class="tooltip-quantity" id="tooltip-quantity">1x</span>
+        </div>
+        <div class="tooltip-info" id="tooltip-info"></div>
+        <div class="tooltip-weight" id="tooltip-weight">Weight: 0.0 lbs</div>
+        <div class="tooltip-durability" id="tooltip-durability">
+            <span>Durability</span>
+            <div class="durability-bar">
+                <div class="durability-fill" id="tooltip-durability-fill"></div>
+            </div>
+            <span id="tooltip-durability-value">100%</span>
+        </div>
+        <div class="tooltip-description" id="tooltip-description"></div>
+        <div class="tooltip-actions" id="tooltip-actions">
+            <div class="split-container hidden" id="split-container">
+                <span>Amount:</span>
+                <input type="number" id="split-amount" min="1" value="1" />
+                <button id="split-btn">SPLIT</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Drag Preview -->
+    <div id="drag-preview" class="drag-preview hidden">
+        <img id="drag-image" src="" alt="" />
+        <span id="drag-quantity"></span>
+    </div>
+    
+    <script src="js/inventory.js"></script>
+</body>
+</html>

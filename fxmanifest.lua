@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'gta5'
 
 author "Pappu"
-description 'qb-inventorynp'
-version '1.0.4'
+description 'qb-inventorynp - Redesigned UI'
+version '2.0.0'
 
 shared_scripts {
 	'config.lua',
@@ -15,22 +15,20 @@ lua54 'yes'
 server_scripts {
 	'@oxmysql/lib/MySQL.lua',
 	'server/main.lua',
-	-- 'server/visual.lua',
 }
 
 client_scripts {
 	'client/main.lua',
 }
 
-
 ui_page {
-	'nui/pappunp.html'
+	'nui/index.html'
 }
 
 files {
-	'nui/pappunp.html',
-	'nui/css/main.css',
-	'nui/js/app.js',
+	'nui/index.html',
+	'nui/css/inventory.css',
+	'nui/js/inventory.js',
 	'nui/images/*.svg',
 	'nui/images/*.png',
 	'nui/images/*.jpg',
